@@ -1,0 +1,27 @@
+<div role="navigation" class="navbar navbar-default navbar-fixed-top" ng-controller="headerCtrl">
+  <div class="container-fluid">
+  	<div class="navbar-header">
+  		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+  			<span class="sr-only">Toggle navigation</span>
+  			<i class="fa fa-bars fa-lg"></i>
+  		</button>
+  		<a href="#" class="navbar-brand">Menu</a>
+  	</div>
+  	<div class="navbar-collapse collapse">
+  		<ul class="nav navbar-nav">
+  			<li>
+  				<a id="homeBtn" ui-sref="index">Home <i class="fa fa-home fa-navbar"></i></a>
+  			</li>
+  			<li>
+  				<a id="resetBtn" href="#" ng-click="resetStorage()">Reset <i class="fa fa-refresh fa-navbar"></i></a>
+  			</li>
+  			<li>
+  				<a id="sourceBtn" href="https://github.com/pastweb/wallet">View Source <i class="fa fa-eye fa-navbar"></i></a>
+  			</li>
+  			<li>
+  				<a id="infoBtn" ui-sref="info">Info <i class="fa fa-info fa-navbar"></i></a>
+  			</li>
+  		</ul>
+  	</div>
+  </div>
+</div>

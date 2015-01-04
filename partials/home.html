@@ -1,0 +1,35 @@
+<div ng-controller="homeCtrl">
+	<div class="home-header">
+		<div class="balance">
+			<div style="margin-left: 20px;">Current balance:</div>
+			<br/>
+			<div style="text-align: center;">
+				<h3>£ &nbsp;{{$storage.balance}}</h3>
+			</div>
+			<br/>
+			<div style="text-align: right; margin-right: 20px;">last update: {{lastUpdate}}</div>
+		</div>
+		<form name="myForm" role="form" novalidate>
+			<div class="input-group operations" ng-class="{'has-error': myForm.inputAmount.$invalid}">
+  				<span id="addBtn" class="input-group-addon" ng-click="addValue()"><i class="fa fa-plus" style="color: green;"></i></span>
+  				<input type="text" ng-class="inputClass" id="inputAmount" name="inputAmount" placeholder="Amount"
+  			 			ng-model="amount" smart-float ng-focus="cleanField()">
+  				<span id="rmBtn" class="input-group-addon" ng-click="rmValue()"><i class="fa fa-minus" style="color: red;"></i></span>
+			</div>
+		</form>
+	</div>
+	<div class="scrollable">
+  		<div class="list-group">
+  			<a class="list-group-item" ng-repeat="operation in $storage.operations | orderBy: '-date'" ng-class="setBGItem(operation.symbol).class">
+  				<div style="float: left;">
+  					<i ng-class="setBGItem(operation.symbol).icon"></i>&nbsp;&nbsp;&nbsp;
+  					<i class="fa fa-gbp"></i>
+  					&nbsp;{{operation.amount}}
+  				</div>
+  				<div style="text-align: right;">
+  					{{operation.date}}
+  				</div>
+  			</a>
+  		</div>
+	</div>
+</div>

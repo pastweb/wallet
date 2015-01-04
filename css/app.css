@@ -1,0 +1,45 @@
+.app_body {
+	margin-top: 50px;
+}
+
+.home-header {
+/*	position: fixed;
+	z-index: 1030;*/
+}
+
+.balance {
+	background: #007aff;
+	color: white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.operations {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.scrollable {
+/*	position: fixed;
+	z-index: 1030;
+	width: 100%;*/
+}
+
+.scrollable-content {
+	overflow: auto;
+   height: 20%;
+}
+
+.valueError {
+	background-color: #a94442;
+}
+
+.negative {
+	background-color: #F7BDBD;
+}
+
+.positive {
+	background-color: #BDF7BE;
+}
