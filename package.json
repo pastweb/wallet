@@ -10,7 +10,7 @@
     "karma": "~0.8"
   },
   "scripts": {
-    "test": "karma start test/karma.config.js"
+    "test": "./node_modules/.bin/karma start test/karma.config.js"
   },
   "repository": {
     "type": "git",
