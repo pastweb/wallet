@@ -7,7 +7,7 @@
     "test": "test"
   },
   "devDependencies": {
-    "karma": "~0.12.28"
+    "karma": "~0.8"
   },
   "scripts": {
     "test": "karma start test/karma.config.js"
