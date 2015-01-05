@@ -26,7 +26,6 @@ module.exports = function(config) {
       '../js/*.js',
       '../js/**/*.js',
     // Unit test
-//      './unit/*.test.js',
       './unit/**/*.test.js'
     ],
 
@@ -84,6 +83,6 @@ module.exports = function(config) {
   if(process.env.TRAVIS){
     configuration.browsers = ['Chrome_travis_ci'];
   }
-  
+
   config.set(configuration);
 };

@@ -1,21 +1,24 @@
 'use strict';
 
 describe('Wallet routes test', function(){
+
+	var basePath = 'http://localhost/angular-apps/wallet/';
+
 	beforeEach(function(){
-		browser().navigateTo('/');
+		browser.get(basePath);
 	});
 
 	it('the browser location should be /#/',function(){
-		expect(browser().location().path()).toBe("/#/");
+		expect(browser.getCurrentUrl()).toContain("/#/");
 	});
 
 	it('the browser location should be /#/ for eny other wrong location',function(){
-		browser().navigateTo('/blablabla');
-		expect(browser().location().path()).toBe("/#/");
+		browser.get(basePath+'#/blablabla');
+		expect(browser.getCurrentUrl()).toContain("/#/");
 	});
 
 	it('the browser location should be /#/info',function(){
-		browser().navigateTo('/#/info');
-		expect(browser().location().path()).toBe("/#/info");
+		browser.get(basePath+'#/info');
+		expect(browser.getCurrentUrl()).toContain("#/info");
 	});
 });

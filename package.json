@@ -7,7 +7,7 @@
     "test": "test"
   },
   "devDependencies": {
-    "karma": "~0.10"
+    "karma": "^0.10"
   },
   "scripts": {
     "test": "./node_modules/.bin/karma start test/karma.config.js"
