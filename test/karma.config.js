@@ -15,15 +15,18 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+    //  Dependencies
       '../lib/angular-1.3.8/angular.js',
       '../lib/angular-1.3.8/angular-mocks.js',
       '../lib/jquery/jquery-2.1.1.min.js',
       '../lib/bootstrap-ui/bootstrap-3.2.0-dist/js/bootstrap.min.js',
       '../lib/ngStorage/ngStorage.min.js',
       '../lib/angular-ui-router/angular-ui-router.min.js',
+    //  My Code
       '../js/*.js',
       '../js/**/*.js',
-      './unit/*.test.js',
+    // Unit test
+//      './unit/*.test.js',
       './unit/**/*.test.js'
     ],
 
@@ -64,7 +67,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS','Chrome'],
 
 
     // Continuous Integration mode
