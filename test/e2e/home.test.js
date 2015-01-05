@@ -22,7 +22,7 @@ describe('Wallet homepage tests', function() {
   };
 
   beforeEach(function(){
-    browser.get('http://localhost/angular-apps/wallet/new/wallet/#/');
+    browser.get('http://localhost/angular-apps/wallet/');
   });
 
   it('should check the right page title', function() {
