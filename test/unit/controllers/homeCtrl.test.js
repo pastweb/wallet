@@ -2,19 +2,18 @@
 
 describe('homeCtrl', function(){
 
-	var scope, rootScope;
+	var scope, rootScope, controller;
 
 	beforeEach(function(){
-//		module('myApp');
-		module('ngStorage');
-//		module.mock('myApp');
+		module('myApp');
 	});
 
-	beforeEach(inject(function ($rootScope, $localStorage){
+	beforeEach(inject(function ($rootScope, $localStorage, $controller){
 		rootScope = $rootScope.$new();
 		scope = $rootScope.$new();
+		controller = $controller('homeCtrl', {$scope: scope, $rootScope: rootScope});
 
-		scope.$storage = $localStorage.$default({balance: 0, operations : []});
+		scope.$storage = {balance: 0, operations : []};
 		scope.getDateTime = function(){
 			var dateTime = new Date();
 			dateTime = dateTime.getDay()+'/'+dateTime.getMonth()+'/'+dateTime.getFullYear()+' '+dateTime.getHours()+':'+dateTime.getMinutes()+':'+dateTime.getSeconds();
@@ -32,40 +31,40 @@ describe('homeCtrl', function(){
 				templateUrl: 'partials/modal.html',
 				message: customMessage
 			};
-			$rootScope.$emit('openModal', settings);
+			rootScope.$emit('openModal', settings);
   		};
 
   		scope.addValue = function(){
-			if(!isNaN($scope.amount)){
-				if($scope.amount > 0){
-					$scope.$storage.balance += $scope.amount;
-					$scope.$storage.operations.push({symbol: '+',amount: $scope.amount, date: $scope.getDateTime()});
-					$scope.lastUpdate = $scope.getDateTime();
-					$scope.cleanField();
+			if(!isNaN(scope.amount)){
+				if(scope.amount > 0){
+					scope.$storage.balance += scope.amount;
+					scope.$storage.operations.push({symbol: '+',amount: scope.amount, date: scope.getDateTime()});
+					scope.lastUpdate = scope.getDateTime();
+					scope.cleanField();
 				}
 			}else{
-				$scope.showModal('the text is not a number');
+				scope.showModal('the text is not a number');
 			}
 		};
 
 		scope.rmValue = function(){
-			if(!isNaN($scope.amount) && ($scope.amount <= $scope.$storage.balance) && ($scope.amount > 0)){
-				$scope.$storage.balance -= $scope.amount;
-				$scope.$storage.operations.push({symbol: '-',amount: $scope.amount, date: $scope.getDateTime()});
-				$scope.lastUpdate = $scope.getDateTime();
-				$scope.cleanField();
+			if(!isNaN(scope.amount) && (scope.amount <= scope.storage.balance) && (scope.amount > 0)){
+				scope.$storage.balance -= scope.amount;
+				scope.storage.operations.push({symbol: '-',amount: scope.amount, date: scope.getDateTime()});
+				scope.lastUpdate = scope.getDateTime();
+				scope.cleanField();
 			}else{
 				var message = '';
-				if( $scope.amount > $scope.$storage.balance ){
+				if( scope.amount > scope.$storage.balance ){
 					message = 'the Amont value is greater that Balance.';
 				}else
 					message = 'the text is not a number';
-				$scope.showModal(message);
+				scope.showModal(message);
 			}
 		};
 
 		scope.cleanField = function(){
-			$scope.amount = '';
+			scope.amount = '';
 		};
 
 		scope.setBGItem = function(symbol){
@@ -79,53 +78,56 @@ describe('homeCtrl', function(){
 			}
 			return settings;
 		};
+
+		rootScope.$on('resetEvent', function(){
+			scope.$storage.balance = 0;
+			scope.$storage.operations = [];
+		});
+
+		scope.resetData = function(){
+			rootScope.$emit('resetEvent');
+		}
 	}));
 
-	it('test the default localStorage variable', function ($controller) {
-		var controller = $controller('homeCtrl', {$scope: scope});
-      	expect($scope.$storage).toBeDefined();
-      	expect($scope.$storage.balance).toBe(0);
-      	expect($scope.$storage.operations).toBe([]);
+	it('test the default localStorage variable', function(){
+     	expect(scope.$storage).toBeDefined();
+    	expect(scope.$storage.balance).toBe(0);
+     	expect(scope.$storage.operations.length).toBe(0);
     });
 
-    it('test the default amount variable', function ($controller){
-    	var controller = $controller('homeCtrl', {$scope: scope});
-    	expect($scope.amount).toBeDefined();
-    	expect($scope.amount).toEqual(0);
+    it('test the default amount variable', function(){
+    	expect(scope.amount).toBeDefined();
+    	expect(scope.amount).toEqual(0);
     });
 
-    it('test the getDateTime method', function ($controller){
-    	var controller = $controller('homeCtrl', {$scope: scope});
-    	expect($scope.getDateTime).not.toBeNull();
-    	expect($scope.getDateTime).toBeDefined();
-    	expect($scope.getDateTime).not.toThrow();
+    it('test the getDateTime method', function(){
+    	expect(scope.getDateTime).not.toBeNull();
+    	expect(scope.getDateTime).toBeDefined();
+    	expect(scope.getDateTime).not.toThrow();
 
     	var lastUpdate = scope.getDateTime();
     	expect(lastUpdate).toBeDefined();
     });
 
-    it('test the lastUpdate default value', function ($controller){
-    	var controller = $controller('homeCtrl', {$scope: scope});
-    	expect($scope.lastUpdate).not.toBeNull();
-    	expect($scope.lastUpdate).toBeDefined();
+    it('test the lastUpdate default value', function(){
+    	expect(scope.lastUpdate).not.toBeNull();
+    	expect(scope.lastUpdate).toBeDefined();
     });
 
-    it('test the default inputClass variable', function ($controller){
-    	var controller = $controller('homeCtrl', {$scope: scope});
-    	expect($scope.inputClass).toBe('form-control');
+    it('test the default inputClass variable', function(){
+    	expect(scope.inputClass).toBe('form-control');
     });
 
-    it('test the default modalMessage variable', function ($controller){
-    	var controller = $controller('homeCtrl', {$scope: scope});
-    	expect($scope.modalMessage).toBe('');
+    it('test the default modalMessage variable', function(){
+    	expect(scope.modalMessage).toBe('');
     });
 
-    it('test the showModal method', function ($controller){
-    	var controller = $controller('homeCtrl', {$scope: scope});
+    it('test the showModal method', function(){
     	spyOn(rootScope,'$emit');
-    	expect($scope.showModal).not.toBeNull();
-    	expect($scope.showModal).toBeDefined();
-    	expect($scope.showModal).not.toThrow();
+
+    	expect(scope.showModal).not.toBeNull();
+    	expect(scope.showModal).toBeDefined();
+    	expect(scope.showModal).not.toThrow();
 
     	var customMessage = 'some modal message';
 
@@ -140,31 +142,28 @@ describe('homeCtrl', function(){
 		expect(rootScope.$emit).toHaveBeenCalledWith('openModal', settings);
     });
 
-    it('test the addValue method', function ($controller){
-    	var controller = $controller('homeCtrl', {$scope: scope});
-    	expect($scope.addValue).not.toBeNull();
-    	expect($scope.addValue).toBeDefined();
-    	expect($scope.addValue).not.toThrow();
+    it('test the addValue method', function(){
+    	expect(scope.addValue).not.toBeNull();
+    	expect(scope.addValue).toBeDefined();
+    	expect(scope.addValue).not.toThrow();
     });
 
-    it('test the cleanField method', function ($controller){
-    	var controller = $controller('homeCtrl', {$scope: scope});
-    	expect($scope.cleanField).not.toBeNull();
-    	expect($scope.cleanField).toBeDefined();
-    	expect($scope.cleanField).not.toThrow();
+    it('test the cleanField method', function(){
+    	expect(scope.cleanField).not.toBeNull();
+    	expect(scope.cleanField).toBeDefined();
+    	expect(scope.cleanField).not.toThrow();
     });
 
-    it('test the setBGItem method', function ($controller){
-    	var controller = $controller('homeCtrl', {$scope: scope});
-    	expect($scope.setBGItem).not.toBeNull();
-    	expect($scope.setBGItem).toBeDefined();
-    	expect($scope.setBGItem).not.toThrow();
+    it('test the setBGItem method', function(){
+    	expect(scope.setBGItem).not.toBeNull();
+    	expect(scope.setBGItem).toBeDefined();
+    	expect(scope.setBGItem).not.toThrow();
     });
 
-    it('test rootScope on resetEvent', function ($controller){
-    	var controller = $controller('homeCtrl', {$scope: scope});
+    it('test rootScope on resetEvent', function(){
     	spyOn(rootScope, '$on');
+
+    	scope.resetData();
     	expect(rootScope.$on).toHaveBeenCalledWith('resetEvent');
-    	rootScope.$emit('resetEvent');
     });
 });
