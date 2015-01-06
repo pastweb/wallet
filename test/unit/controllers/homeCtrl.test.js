@@ -16,7 +16,7 @@ describe('homeCtrl', function(){
 		scope.$storage = {balance: 0, operations : []};
 		scope.getDateTime = function(){
 			var dateTime = new Date();
-			dateTime = dateTime.getDay()+'/'+dateTime.getMonth()+'/'+dateTime.getFullYear()+' '+dateTime.getHours()+':'+dateTime.getMinutes()+':'+dateTime.getSeconds();
+			dateTime = dateTime.getDate()+'/'+(dateTime.getMonth()+1)+'/'+dateTime.getFullYear()+' '+dateTime.getHours()+':'+dateTime.getMinutes()+':'+dateTime.getSeconds();
 			return dateTime;
 		};
 		scope.amount = 0;
@@ -25,13 +25,8 @@ describe('homeCtrl', function(){
 		scope.modalMessage = '';
 
 		scope.showModal = function(customMessage){
-			var settings = {
-				size: 'lg',
-				backdrop: 'static',
-				templateUrl: 'partials/modal.html',
-				message: customMessage
-			};
-			rootScope.$emit('openModal', settings);
+			var message = {message: customMessage};
+			rootScope.$emit('openModal', message);
   		};
 
   		scope.addValue = function(){
@@ -106,7 +101,10 @@ describe('homeCtrl', function(){
     	expect(scope.getDateTime).not.toThrow();
 
     	var lastUpdate = scope.getDateTime();
+    	var dateTime = new Date();
+		dateTime = dateTime.getDate()+'/'+(dateTime.getMonth()+1)+'/'+dateTime.getFullYear()+' '+dateTime.getHours()+':'+dateTime.getMinutes()+':'+dateTime.getSeconds();
     	expect(lastUpdate).toBeDefined();
+    	expect(lastUpdate).toBe(dateTime);
     });
 
     it('test the lastUpdate default value', function(){
@@ -133,13 +131,8 @@ describe('homeCtrl', function(){
 
     	scope.showModal(customMessage);
 
-    	var settings = {
-				size: 'lg',
-				backdrop: 'static',
-				templateUrl: 'partials/modal.html',
-				message: customMessage
-			};
-		expect(rootScope.$emit).toHaveBeenCalledWith('openModal', settings);
+    	var modalMessage = {message: customMessage};
+		expect(rootScope.$emit).toHaveBeenCalledWith('openModal', modalMessage);
     });
 
     it('test the addValue method', function(){
@@ -161,9 +154,8 @@ describe('homeCtrl', function(){
     });
 
     it('test rootScope on resetEvent', function(){
-    	spyOn(rootScope, '$on');
-
     	scope.resetData();
-    	expect(rootScope.$on).toHaveBeenCalledWith('resetEvent');
+    	expect(scope.$storage.balance).toBe(0);
+     	expect(scope.$storage.operations.length).toBe(0);
     });
 });

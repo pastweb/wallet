@@ -1,34 +1,22 @@
 'use strict';
 
-app.controller('homeCtrl', ['$scope', '$localStorage', '$rootScope', 'ModalService', function($scope, $localStorage, $rootScope, ModalService){
+app.controller('homeCtrl', ['$scope', '$localStorage', '$rootScope', function($scope, $localStorage, $rootScope){
 
 	$scope.$storage = $localStorage.$default({balance: 0, operations : []});
 
 	$scope.getDateTime = function(){
 		var dateTime = new Date();
-		dateTime = dateTime.getDay()+'/'+dateTime.getMonth()+'/'+dateTime.getFullYear()+' '+dateTime.getHours()+':'+dateTime.getMinutes()+':'+dateTime.getSeconds();
+		dateTime = dateTime.getDate()+'/'+(dateTime.getMonth()+1)+'/'+dateTime.getFullYear()+' '+dateTime.getHours()+':'+dateTime.getMinutes()+':'+dateTime.getSeconds();
 		return dateTime;
 	}
 
 	$scope.amount = 0;
 	$scope.lastUpdate = $scope.getDateTime();
 	$scope.inputClass = 'form-control';
-	$scope.modalMessage = '';
 
 	$scope.showModal = function(customMessage){
-		ModalService.showModal({
-      		templateUrl: "partials/modal.html",
-      		controller: "modalCtrl",
-      		inputs: {
-        		message: customMessage
-      		}
-    	}).then(function(modal) {
-      		modal.element.modal();
-      		modal.close.then(function(result) {
-        		$scope.amount = 0.00;
-        		angular.element('.modal-backdrop').remove();
-      		});
-    	});
+		var message = {message: customMessage};
+		$rootScope.$emit('openModal', message);
   	};
 
 	$scope.addValue = function(){

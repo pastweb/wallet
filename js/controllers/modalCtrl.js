@@ -1,11 +1,20 @@
 'use strict';
 
-app.controller('modalCtrl', ['$scope', 'message', 'close', function($scope, message, close) {
+app.controller('modalCtrl', ['$scope', '$rootScope', '$timeout', function($scope, $rootScope, $timeout) {
 
-  $scope.message = message;
+  $scope.modalMessage = '';
+  $scope.modalClass = 'app_modal hide_element';
+
+  $rootScope.$on('openModal', function(event, data){
+  	$scope.modalMessage = data.message;
+  	$scope.modalClass = 'app_modal show_element fade_in';
+  });
   
-  $scope.close = function(result) {
-  	close(result, 500); // close, but give 500ms for bootstrap to animate
+  $scope.close = function() {
+  	$scope.modalClass = 'app_modal fade_out';
+  	$timeout(function(){
+  		$scope.modalClass = 'app_modal hide_element';
+  	}, 700);
   };
 
 }]);

@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp',['ui.router', 'ngStorage', 'angularModalService']);
+var app = angular.module('myApp',['ui.router', 'ngStorage']);
 
 app.config(function($stateProvider, $urlRouterProvider){
 
@@ -10,6 +10,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 		.state('index',{
 			url: "/",
 			views: {
+				"app_modal": {templateUrl: "partials/modal.html"},
 				"app_header": {templateUrl: "partials/header.html"},
 				"app_container": {templateUrl: "partials/home.html"}
 			} 
@@ -17,6 +18,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 		.state('info',{
 			url: "/info",
 			views: {
+				"app_modal": {templateUrl: "partials/modal.html"},
 				"app_header": {templateUrl: "partials/header.html"},
 				"app_container": {templateUrl: "partials/info.html"}
 			}

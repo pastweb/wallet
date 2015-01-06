@@ -2,6 +2,104 @@
 	margin-top: 50px;
 }
 
+.app_modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1050;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-header-error {
+  color: white;
+  background: #ad1b11; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ad1b11 0%, #d1413e 50%, #ce3939 51%, #d11e1b 99%, #000000 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ad1b11), color-stop(50%,#d1413e), color-stop(51%,#ce3939), color-stop(99%,#d11e1b), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #ad1b11 0%,#d1413e 50%,#ce3939 51%,#d11e1b 99%,#000000 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #ad1b11 0%,#d1413e 50%,#ce3939 51%,#d11e1b 99%,#000000 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #ad1b11 0%,#d1413e 50%,#ce3939 51%,#d11e1b 99%,#000000 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #ad1b11 0%,#d1413e 50%,#ce3939 51%,#d11e1b 99%,#000000 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ad1b11', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
+.hide_element {
+	display: none;
+}
+
+.show_element {
+	display:;
+}
+
+.fade_in {
+  animation-name: fadeAnimation-in;
+  animation-duration: .7s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: fadeAnimation-in;
+  -webkit-animation-duration: .7s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-name: fadeAnimation-in;
+  -moz-animation-duration: .7s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease;
+  -moz-animation-fill-mode: forwards;
+}
+@keyframes fadeAnimation-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeAnimation-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade_out {
+  animation-name: fadeAnimation-out;
+  animation-duration: .7s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  -webkit-animation-name: fadeAnimation-out;
+  -webkit-animation-duration: .7s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-name: fadeAnimation-out;
+  -moz-animation-duration: .7s;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease;
+  -moz-animation-fill-mode: forwards;
+}
+@keyframes fadeAnimation-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fadeAnimation-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .home-header {
 /*	position: fixed;
 	z-index: 1030;*/

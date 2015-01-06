@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Wallet homepage tests', function() {
   
   var resetButton = element(by.id('resetBtn'));
@@ -32,6 +34,11 @@ describe('Wallet homepage tests', function() {
   it('should check the balance value to 0 after the reset', function() {
     reset();
     expect(balance.getText()).toEqual('£  0');
+  });
+
+  it('shold show a modal error', function(){
+    rmButton.click();
+    expect(element(by.id('modal_backdrop'))).toBeDefined();
   });
 
   it('should check the right balance value after a value added', function() {
