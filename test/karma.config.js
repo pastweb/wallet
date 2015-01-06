@@ -22,6 +22,7 @@ module.exports = function(config) {
       '../lib/bootstrap-ui/bootstrap-3.2.0-dist/js/bootstrap.min.js',
       '../lib/ngStorage/ngStorage.min.js',
       '../lib/angular-ui-router/angular-ui-router.min.js',
+      '../lib/angular-modal-service/dst/angular-modal-service.js',
     //  My Code
       '../js/*.js',
       '../js/**/*.js',
