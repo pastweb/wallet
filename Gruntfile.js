@@ -54,8 +54,8 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'qunit']
+      files: ['unit/**/*.test.js'],
+      tasks: ['karma']
     }
   });
   // Load Plugins
@@ -67,6 +67,7 @@ module.exports = function(grunt) {
 
   // Tasks List
   grunt.registerTask('test', ['karma']);
+  grunt.registerTask('min', ['concat', 'uglify', 'cssmin']);
   grunt.registerTask('default', ['karma', 'concat', 'uglify', 'cssmin']);
 
 };
