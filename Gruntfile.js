@@ -17,8 +17,19 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          'dist/js/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
         }
+      }
+    },
+    cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'src/css',
+          src: ['*.css', '!*.min.css'],
+          dest: 'dist/css',
+          ext: '.min.css'
+        }]
       }
     },
     karma: {
@@ -50,11 +61,12 @@ module.exports = function(grunt) {
   // Load Plugins
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Tasks List
   grunt.registerTask('test', ['karma']);
-  grunt.registerTask('default', ['karma', 'concat', 'uglify']);
+  grunt.registerTask('default', ['karma', 'concat', 'uglify', 'cssmin']);
 
 };
