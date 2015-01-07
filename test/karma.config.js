@@ -23,8 +23,8 @@ module.exports = function(config) {
       '../lib/ngStorage/ngStorage.min.js',
       '../lib/angular-ui-router/angular-ui-router.min.js',
     //  My Code
-      '../js/*.js',
-      '../js/**/*.js',
+      '../src/js/*.js',
+      '../src/js/**/*.js',
     // Unit test
       './unit/**/*.test.js'
     ],
